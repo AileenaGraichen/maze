@@ -1,43 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>A* Pathfinding Visualizer</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
-        }
-        #canvas {
-            border: 1px solid black;
-        }
-        .controls {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .controls button {
-            margin: 0 10px;
-        }
-    </style>
-</head>
-<body>
-    <div>
+  </head>
+  <body>
+    <div id="container">
+      <div id="color-info">
+        <p>Hello</p>
+      </div>
+      <div id="canvas-container">
         <canvas id="canvas" width="800" height="800"></canvas>
-        <div class="controls">
-            <button id="startSearch">Start Search</button>
-            <button id="generateMaze">Generate Maze</button>
-            <button id="clearMaze">Clear Maze</button>
-        </div>
+      </div>
+      <div class="controls">
+        <button id="startSearch" class="button">Start Search</button>
+        <button id="generateMaze" class="button">Generate Maze</button>
+        <button id="clearMaze" class="button">Clear Maze</button>
+      </div>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
-
-
