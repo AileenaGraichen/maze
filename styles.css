@@ -4,7 +4,6 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #2d2626;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -14,14 +13,84 @@ body {
   display: flex;
   width: 100vw;
   height: 100vh;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+#background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 #color-info {
-  background-color: aquamarine;
+  background: rgba(38, 36, 36, 0.433);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   width: 20%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 4rem;
+  padding: 2rem;
+  height: 50%;
+  color: white;
+  font-size: 2rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.color-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.color-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin-right: 1rem;
+}
+
+.color-item span {
+  font-weight: bold;
+}
+
+.color-item:nth-child(1) .color-circle {
+  background-color: #008000;
+}
+
+.color-item:nth-child(2) .color-circle {
+  background-color: #0000ff;
+}
+
+.color-item:nth-child(3) .color-circle {
+  background-color: #b10707e7;
+}
+
+.color-item:nth-child(4) .color-circle {
+  background-color: #614b4b;
+}
+
+.color-item:nth-child(5) .color-circle {
+  background-color: #ff9900;
+}
+.color-item:nth-child(6) .color-circle {
+  background-color: #fcff45;
+}
+
+.color-item:nth-child(7) .color-circle {
+  background-color: #000000;
 }
 
 #canvas-container {
@@ -37,18 +106,17 @@ body {
 }
 
 .controls {
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 20%;
+  margin: 4rem;
 }
 
 .controls button {
   margin: 10px 0;
 }
 
-/* buttons */
 .button {
   font-size: 16px;
   font-weight: 200;
@@ -64,25 +132,62 @@ body {
   touch-action: manipulation;
 }
 
-.button:after {
+.lava-button {
+  font-family: "Arial", sans-serif;
+  font-size: 20px;
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  background: linear-gradient(90deg, #ff6a00, #ff8c00, #ff6a00);
+  background-size: 200% 200%;
+  animation: lavaFlow 5s infinite;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 69, 0, 0.8),
+    inset 0 0 20px rgba(255, 69, 0, 0.8);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.lava-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 69, 0, 1), inset 0 0 30px rgba(255, 69, 0, 1);
+}
+
+.lava-button:before {
   content: "";
-  background-color: #517ee7;
-  width: 100%;
-  z-index: -1;
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  top: 7px;
-  left: 7px;
-  transition: 0.2s;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255, 165, 0, 0.6),
+    transparent
+  );
+  opacity: 0.8;
+  pointer-events: none;
+  animation: lavaGlow 3s infinite alternate;
 }
 
-.button:hover:after {
-  top: 0px;
-  left: 0px;
+@keyframes lavaFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-@media (min-width: 768px) {
-  .button {
-    padding: 13px 50px 13px;
+@keyframes lavaGlow {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
   }
 }

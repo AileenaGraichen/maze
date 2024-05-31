@@ -45,7 +45,7 @@ function initGrid() {
     for (let col = 0; col < COLS; col++) {
       const node = new Node(row, col);
       currentRow.push(node);
-      node.draw("#f0f0f0"); // Light grey color for unvisited nodes
+      node.draw("rgb(97, 75, 75)"); // dark grey color for walkable
     }
     grid.push(currentRow);
   }
@@ -74,12 +74,12 @@ async function aStar() {
     if (current === endNode) {
       let temp = current;
       while (temp.previous) {
-        temp.draw("#6a0dad"); // Dark purple for the path
+        temp.draw("#000000"); // Black for the path
         temp = temp.previous;
         await sleep(100); // Delay to visualize path
       }
-      startNode.draw("#007bff"); // Blue for the start node
-      endNode.draw("#ff7f50"); // Coral color for the end node
+      startNode.draw("#008000"); // Green for the start node
+      endNode.draw("#0000ff"); // Blue color for the end node
       return;
     }
 
@@ -87,7 +87,7 @@ async function aStar() {
     closedSet.push(current);
 
     current.isClosed = true;
-    current.draw("#ff6347"); // Tomato color for closed nodes
+    current.draw("#ff9900"); // Orange color for visited nodes
 
     const neighbors = getNeighbors(current);
     for (const neighbor of neighbors) {
@@ -111,7 +111,7 @@ async function aStar() {
         neighbor.h = heuristic(neighbor, endNode);
         neighbor.f = neighbor.g + neighbor.h;
         neighbor.previous = current;
-        neighbor.draw("#32cd32"); // Lime green for open nodes
+        neighbor.draw("#fcff45"); // Yellow for open nodes
         await sleep(80); // Delay to visualize expansion
       }
     }
@@ -144,10 +144,10 @@ function generateMaze() {
       if (Math.random() < 0.3) {
         // 30% chance to be a wall
         node.isWall = true;
-        node.draw("#000000"); // Black color for walls
+        node.draw("#b10707e7"); // Red color for walls
       } else {
         node.isWall = false;
-        node.draw("#f0f0f0"); // Light grey color for unvisited nodes
+        node.draw("rgb(97, 75, 75)"); // Gray color for Walkable tiles
       }
     }
   }
@@ -167,15 +167,17 @@ canvas.addEventListener("mousedown", (e) => {
   const row = Math.floor(offsetY / CELL_SIZE);
   const col = Math.floor(offsetX / CELL_SIZE);
   const node = grid[row][col];
-
+  if (node.isWall) {
+    return;
+  }
   if (!startNode) {
     startNode = node;
     startNode.isStart = true;
-    startNode.draw("#007bff"); // Blue color for the start node
+    startNode.draw("#008000"); // Green color for the start node
   } else if (!endNode) {
     endNode = node;
     endNode.isEnd = true;
-    endNode.draw("#ff7f50"); // Coral color for the end node
+    endNode.draw("#0000ff"); // Blue color for the end node
   }
 });
 

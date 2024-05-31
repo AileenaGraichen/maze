@@ -4,20 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>A* Pathfinding Visualizer</title>
+    <title>Magma Maze</title>
   </head>
   <body>
     <div id="container">
+      <video autoplay muted loop id="background-video">
+        <source src="Lava-Video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       <div id="color-info">
-        <p>Hello</p>
+        <div class="color-item">
+          <div class="color-circle"></div>
+          <span>Start Node</span>
+        </div>
+        <div class="color-item">
+          <div class="color-circle"></div>
+          <span>End Node</span>
+        </div>
+        <div class="color-item">
+          <div class="color-circle"></div>
+          <span>Lava</span>
+        </div>
+        <div class="color-item">
+          <div class="color-circle"></div>
+          <span>Walkable surface</span>
+        </div>
+        <div class="color-item">
+          <div class="color-circle"></div>
+          <span>Visited Nodes</span>
+        </div>
+        <div class="color-item">
+          <div class="color-circle"></div>
+          <span>Open Nodes</span>
+        </div>
+        <div class="color-item">
+          <div class="color-circle"></div>
+          <span>Optimal Path</span>
+        </div>
       </div>
       <div id="canvas-container">
         <canvas id="canvas" width="800" height="800"></canvas>
       </div>
       <div class="controls">
-        <button id="startSearch" class="button">Start Search</button>
-        <button id="generateMaze" class="button">Generate Maze</button>
-        <button id="clearMaze" class="button">Clear Maze</button>
+        <button id="startSearch" class="lava-button">Start Search</button>
+        <button id="generateMaze" class="lava-button">Generate Maze</button>
+        <button id="clearMaze" class="lava-button">Clear Maze</button>
       </div>
     </div>
     <script src="script.js"></script>
