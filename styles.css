@@ -9,6 +9,12 @@ body {
   overflow: hidden;
 }
 
+#Logo {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+}
+
 #container {
   display: flex;
   width: 100vw;
@@ -42,10 +48,11 @@ body {
   justify-content: center;
   margin: 4rem;
   padding: 2rem;
-  height: 50%;
+  height: auto;
   color: white;
-  font-size: 2rem;
+  font-size: 1.2rem;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  align-items: start;
 }
 
 .color-item {
@@ -66,30 +73,30 @@ body {
   font-weight: bold;
 }
 
-.color-item:nth-child(1) .color-circle {
+.color-item:nth-child(5) .color-circle {
   background-color: #008000;
 }
 
-.color-item:nth-child(2) .color-circle {
+.color-item:nth-child(6) .color-circle {
   background-color: #0000ff;
 }
 
-.color-item:nth-child(3) .color-circle {
+.color-item:nth-child(7) .color-circle {
   background-color: #b10707e7;
 }
 
-.color-item:nth-child(4) .color-circle {
+.color-item:nth-child(8) .color-circle {
   background-color: #614b4b;
 }
 
-.color-item:nth-child(5) .color-circle {
+.color-item:nth-child(9) .color-circle {
   background-color: #ff9900;
 }
-.color-item:nth-child(6) .color-circle {
+.color-item:nth-child(10) .color-circle {
   background-color: #fcff45;
 }
 
-.color-item:nth-child(7) .color-circle {
+.color-item:nth-child(11) .color-circle {
   background-color: #000000;
 }
 

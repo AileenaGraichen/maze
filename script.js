@@ -161,24 +161,66 @@ canvas.addEventListener("click", (e) => {
   console.log(target);
 });
 
-// Handle mouse events
+// Handle mouse events for setting start and end nodes with left button
 canvas.addEventListener("mousedown", (e) => {
-  const { offsetX, offsetY } = e;
-  const row = Math.floor(offsetY / CELL_SIZE);
-  const col = Math.floor(offsetX / CELL_SIZE);
-  const node = grid[row][col];
-  if (node.isWall) {
-    return;
+  if (e.button === 0) {
+    // Left mouse button
+    const { offsetX, offsetY } = e;
+    const row = Math.floor(offsetY / CELL_SIZE);
+    const col = Math.floor(offsetX / CELL_SIZE);
+    const node = grid[row][col];
+
+    if (!startNode) {
+      startNode = node;
+      startNode.isStart = true;
+      startNode.draw("#008000"); // Green color for the start node
+    } else if (!endNode) {
+      endNode = node;
+      endNode.isEnd = true;
+      endNode.draw("#0000ff"); // Blue color for the end node
+    }
   }
-  if (!startNode) {
-    startNode = node;
-    startNode.isStart = true;
-    startNode.draw("#008000"); // Green color for the start node
-  } else if (!endNode) {
-    endNode = node;
-    endNode.isEnd = true;
-    endNode.draw("#0000ff"); // Blue color for the end node
+});
+
+// Handle right click to start drawing walls
+canvas.addEventListener("mousedown", (e) => {
+  if (e.button === 2) {
+    // Right mouse button
+    e.preventDefault(); // Prevent the context menu from appearing
+    isDrawingWall = true;
+    const { offsetX, offsetY } = e;
+    const row = Math.floor(offsetY / CELL_SIZE);
+    const col = Math.floor(offsetX / CELL_SIZE);
+    const node = grid[row][col];
+    if (!node.isStart && !node.isEnd) {
+      node.isWall = true;
+      node.draw("#b10707e7"); // Red color for walls
+    }
   }
+});
+
+canvas.addEventListener("mousemove", (e) => {
+  if (isDrawingWall) {
+    const { offsetX, offsetY } = e;
+    const row = Math.floor(offsetY / CELL_SIZE);
+    const col = Math.floor(offsetX / CELL_SIZE);
+    const node = grid[row][col];
+    if (!node.isStart && !node.isEnd && !node.isWall) {
+      node.isWall = true;
+      node.draw("#b10707e7"); // Red color for walls
+    }
+  }
+});
+
+canvas.addEventListener("mouseup", (e) => {
+  if (e.button === 2) {
+    // Right mouse button
+    isDrawingWall = false;
+  }
+});
+
+canvas.addEventListener("contextmenu", (e) => {
+  e.preventDefault(); // Prevent the context menu from appearing
 });
 
 // Start search button
@@ -190,6 +232,8 @@ document.getElementById("startSearch").addEventListener("click", () => {
 
 // Generate maze button
 document.getElementById("generateMaze").addEventListener("click", () => {
+  startNode = null;
+  endNode = null;
   generateMaze();
 });
 
